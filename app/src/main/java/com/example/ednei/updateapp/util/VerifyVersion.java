@@ -54,8 +54,7 @@ public class VerifyVersion extends AsyncTask<String, String, String> {
 
         try {
 
-            //URL url = new URL("https://appeste.000webhostapp.com/versionApp.php");
-            URL url = new URL("http://192.168.0.29/Dev/apps/version.php");
+            URL url = new URL("https://appeste.000webhostapp.com/versionApp.php");
             URLConnection urlConnection = url.openConnection();
 
             if (urlConnection.getURL() != null) {

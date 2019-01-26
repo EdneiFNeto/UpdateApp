@@ -19,8 +19,8 @@ public class DownloadManagerUtil {
 
     public static void downloadByDownloadManager(Context context) throws Exception{
 
-        String url = "http://192.168.0.29/Dev/apps/app-release.apk";
-        //String url = "\"https://www.divertenet.com.br/apps/tv-release.apk)";
+
+        String url = "https://www.divertenet.com.br/apps/tv-release.apk";
         DownloadManager.Request request = new DownloadManager.Request(Uri.parse(url));
         request.setDescription("A zip package with some files");
         request.setTitle("Atualização");
