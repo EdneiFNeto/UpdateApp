@@ -5,7 +5,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.widget.Toast;
 
-import com.example.ednei.updateapp.util.DialogUtil;
 import com.example.ednei.updateapp.util.InstallAppUtil;
 
 public class NotificationBroadcCastReceive extends BroadcastReceiver {

@@ -14,7 +14,7 @@ import java.io.File;
 public class InstallAppUtil {
 
     private static String PATH = Environment.getExternalStorageDirectory()+"/Download/";
-    private static String nameApk = "tv-realee.apk";
+    private static String nameApk = "app-release.apk";
 
     public static void openIntentInstall(Context context) throws  Exception{
 

@@ -3,6 +3,7 @@ package com.example.ednei.updateapp.util;
 import android.content.Context;
 import android.os.AsyncTask;
 import android.util.Log;
+import android.widget.Toast;
 
 import com.example.ednei.updateapp.BuildConfig;
 
@@ -34,7 +35,13 @@ public class VerifyVersion extends AsyncTask<String, String, String> {
         if (list.size() > 0) {
             if (!list.get(0).toString().equals(BuildConfig.VERSION_NAME)) {
                 //download project
-                new DownloadUtil(context).execute();
+                //new DownloadUtil(context).execute();
+                try {
+                    DownloadManagerUtil.downloadByDownloadManager(context);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    Toast.makeText(context, "Eror Download "+e.getMessage(), Toast.LENGTH_SHORT).show();
+                }
             }
         }
     }
@@ -47,7 +54,8 @@ public class VerifyVersion extends AsyncTask<String, String, String> {
 
         try {
 
-            URL url = new URL("https://appeste.000webhostapp.com/versionApp.php");
+            //URL url = new URL("https://appeste.000webhostapp.com/versionApp.php");
+            URL url = new URL("http://192.168.0.29/Dev/apps/version.php");
             URLConnection urlConnection = url.openConnection();
 
             if (urlConnection.getURL() != null) {

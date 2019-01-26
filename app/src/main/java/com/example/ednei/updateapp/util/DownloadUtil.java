@@ -15,6 +15,7 @@ import android.widget.Toast;
 
 import com.example.ednei.updateapp.MainActivity;
 import com.example.ednei.updateapp.R;
+import com.example.ednei.updateapp.enuns.ConfigEnum;
 import com.example.ednei.updateapp.services.NotificationBroadcCastReceive;
 
 import org.json.simple.JSONArray;
@@ -42,9 +43,15 @@ public class DownloadUtil extends AsyncTask<String, Integer, Boolean> {
 
     private static final String ACTION_UPDATE = "action_update";
     private String TAG = "DownloadLog";
-    private String PATH = Environment.getExternalStorageDirectory() + "/Download/";
+    /*private String PATH = Environment.getExternalStorageDirectory() + "/Download/";
     private String nameApk = "tv-release.apk";
     private String urlDownloadApp = "https://www.divertenet.com.br/apps/tv-release.apk";
+    */
+
+    private ConfigEnum configEnum;
+    private String PATH = configEnum.PATH.toString();
+    private String nameApk = configEnum.NAME_APK.toString();
+    private String urlDownloadApp = configEnum.STR_URL.toString();
 
     private NotificationManager mNotifyMgr;
     private NotificationCompat.Builder mBuilder;
