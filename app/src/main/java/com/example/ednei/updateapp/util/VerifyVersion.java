@@ -1,17 +1,21 @@
 package com.example.ednei.updateapp.util;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.util.Log;
 import android.widget.Toast;
 
 import com.example.ednei.updateapp.BuildConfig;
+import com.example.ednei.updateapp.ShowNote;
+import com.example.ednei.updateapp.enuns.ConfigEnum;
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.InputStreamReader;
 import java.net.URL;
 import java.net.URLConnection;
@@ -33,10 +37,17 @@ public class VerifyVersion extends AsyncTask<String, String, String> {
         super.onPostExecute(s);
 
         if (list.size() > 0) {
+
+
             if (!list.get(0).toString().equals(BuildConfig.VERSION_NAME)) {
-                //download project
-                //new DownloadUtil(context).execute();
+
                 try {
+                    //delete file
+                    File file = new File(ConfigEnum.PATH.getConfig(), ConfigEnum.NAME_APK.getConfig());
+                    if(file.exists())
+                        file.delete();
+
+                    //download new apk
                     DownloadManagerUtil.downloadByDownloadManager(context);
                 } catch (Exception e) {
                     e.printStackTrace();
@@ -54,7 +65,8 @@ public class VerifyVersion extends AsyncTask<String, String, String> {
 
         try {
 
-            URL url = new URL("https://appeste.000webhostapp.com/versionApp.php");
+            //URL url = new URL("https://appeste.000webhostapp.com/versionApp.php");
+            URL url = new URL(ConfigEnum.URL_JSON.getConfig());
             URLConnection urlConnection = url.openConnection();
 
             if (urlConnection.getURL() != null) {
@@ -66,13 +78,13 @@ public class VerifyVersion extends AsyncTask<String, String, String> {
                 while ((inputLine = in.readLine()) != null) {
 
                     Log.e(TAG, "Entrou no while");
-
                     JSONArray arrayJson = (JSONArray) parser.parse(inputLine);
 
                     for (int i = 0; i < arrayJson.size(); i++) {
 
                         JSONObject jsonObject = (JSONObject) arrayJson.get(i);
-                        String version = (String) jsonObject.get("version");
+                        String version = (String) jsonObject.get("versionName");
+                        String versionCode = (String) jsonObject.get("versionCode");
                         list.add(version);
                         Log.e(TAG, "version: " + version);
                     }
@@ -80,7 +92,7 @@ public class VerifyVersion extends AsyncTask<String, String, String> {
             }
 
         } catch (Exception e) {
-            Log.e(TAG, "Error " + e.getMessage());
+            Log.e(TAG, "Version Error " + e.getMessage());
         }
 
         return null;

@@ -1,28 +1,38 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context=".MainActivity">
 
     <TextView
-        android:layout_centerInParent="true"
+        android:layout_marginTop="30dp"
         android:id="@+id/textViersion"
         android:textSize="34dp"
-        android:layout_width="wrap_content"
+        android:gravity="center"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Version App" />
 
     <TextView
-        android:id="@+id/textVersionCode"
-        android:layout_width="wrap_content"
+        android:gravity="center"
+        android:id="@+id/textID"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignStart="@+id/textViersion"
-        android:layout_alignParentBottom="true"
-        android:layout_marginStart="24dp"
-        android:layout_marginBottom="163dp"
+        android:text="ID"
+        android:textSize="24dp" />
+
+
+    <TextView
+        android:gravity="center"
+        android:id="@+id/textVersionCode"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@+id/textViersion"
         android:text="Version code"
         android:textSize="24dp" />
 
-</RelativeLayout>
+</LinearLayout>

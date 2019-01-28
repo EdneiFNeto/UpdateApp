@@ -2,11 +2,18 @@ package com.example.ednei.updateapp.enuns;
 
 import android.os.Environment;
 
+import com.example.ednei.updateapp.BuildConfig;
+
 public enum ConfigEnum {
 
+    IP("192.168.0.27"),
     PATH(Environment.getExternalStorageDirectory() + "/Download/"),
-    NAME_APK("tv-release.apk"),
-    STR_URL("https://www.divertenet.com.br/apps/tv-release.apk");
+    NAME_APK("app-release.apk"),
+    URL_APK("http://"+IP.getConfig()+"/Dev/apps/"+NAME_APK.getConfig()),
+    URL_JSON("http://"+IP.getConfig()+"/Dev/apps/version.php"),
+    VERSION_NAME(""+BuildConfig.VERSION_NAME),
+    VERSION_CODE(""+BuildConfig.VERSION_CODE),
+    APPLICATION_ID(""+BuildConfig.APPLICATION_ID);
 
     private String config;
 

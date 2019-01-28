@@ -8,25 +8,26 @@ import android.os.Environment;
 import android.support.v4.content.FileProvider;
 
 import com.example.ednei.updateapp.BuildConfig;
+import com.example.ednei.updateapp.enuns.ConfigEnum;
 
 import java.io.File;
 
 public class InstallAppUtil {
 
-    private static String PATH = Environment.getExternalStorageDirectory()+"/Download/";
-    private static String nameApk = "app-release.apk";
 
     public static void openIntentInstall(Context context) throws  Exception{
 
-        File toInstall = new File(PATH, nameApk);
+        File toInstall = new File(ConfigEnum.PATH.getConfig(), ConfigEnum.NAME_APK.getConfig());
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-            Uri apkUri = FileProvider.getUriForFile(context,
-                    BuildConfig.APPLICATION_ID + ".provider", toInstall);
+
+            Uri apkUri = FileProvider.getUriForFile(context,BuildConfig.APPLICATION_ID + ".provider", toInstall);
+
             Intent intent = new Intent(Intent.ACTION_INSTALL_PACKAGE);
             intent.setData(apkUri);
             intent.setFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
             context.startActivity(intent);
+
         } else {
             Uri apkUri = Uri.fromFile(toInstall);
             Intent intent = new Intent(Intent.ACTION_VIEW);

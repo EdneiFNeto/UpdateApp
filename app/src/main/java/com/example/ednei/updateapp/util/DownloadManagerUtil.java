@@ -7,9 +7,8 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.net.Uri;
 import android.os.Environment;
-import android.util.Log;
-import android.widget.Toast;
 
+import com.example.ednei.updateapp.ShowNote;
 import com.example.ednei.updateapp.enuns.ConfigEnum;
 
 public class DownloadManagerUtil {
@@ -20,30 +19,32 @@ public class DownloadManagerUtil {
     public static void downloadByDownloadManager(Context context) throws Exception{
 
 
-        String url = "https://www.divertenet.com.br/apps/tv-release.apk";
-        DownloadManager.Request request = new DownloadManager.Request(Uri.parse(url));
-        request.setDescription("A zip package with some files");
+        DownloadManager.Request request = new DownloadManager.Request(Uri.parse(ConfigEnum.URL_APK.getConfig()));
+        request.setDescription("Baixando atualizações");
         request.setTitle("Atualização");
         request.setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED);
         request.allowScanningByMediaScanner();
-        request.setDestinationInExternalPublicDir(Environment.DIRECTORY_DOWNLOADS, "app-release.apk");
+        request.setDestinationInExternalPublicDir(Environment.DIRECTORY_DOWNLOADS, ConfigEnum.NAME_APK.getConfig());
 
         // get download service and enqueue file
         DownloadManager manager = (DownloadManager) context.getSystemService(Context.DOWNLOAD_SERVICE);
         downloadID  = manager.enqueue(request);
 
+        //when download completed, show notification
         BroadcastReceiver onDownloadComplete = new BroadcastReceiver() {
             @Override
             public void onReceive(Context context, Intent intent) {
                 long id = intent.getLongExtra(DownloadManager.EXTRA_DOWNLOAD_ID, -1);
                 if (downloadID == id) {
-
                     //push notification
-                    NotificationUtil.notificationDownloadCompleted(context);
+                    //context.startActivity(new Intent(context, ShowNote.class));
+                    //NotificationUtil.notificationDownloadCompleted(context);
+                    DialogUtil.showDialog(context);
                 }
             }
         };
 
+        //register broadcast receive
         context.registerReceiver(onDownloadComplete, new IntentFilter(DownloadManager.ACTION_DOWNLOAD_COMPLETE));
     }
 }

@@ -51,7 +51,7 @@ public class DownloadUtil extends AsyncTask<String, Integer, Boolean> {
     private ConfigEnum configEnum;
     private String PATH = configEnum.PATH.toString();
     private String nameApk = configEnum.NAME_APK.toString();
-    private String urlDownloadApp = configEnum.STR_URL.toString();
+    private String urlDownloadApp = configEnum.URL_JSON.toString();
 
     private NotificationManager mNotifyMgr;
     private NotificationCompat.Builder mBuilder;
