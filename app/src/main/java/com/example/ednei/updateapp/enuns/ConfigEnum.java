@@ -6,7 +6,7 @@ import com.example.ednei.updateapp.BuildConfig;
 
 public enum ConfigEnum {
 
-    IP("192.168.0.27"),
+    IP("0.0.0.0"),
     PATH(Environment.getExternalStorageDirectory() + "/Download/"),
     NAME_APK("app-release.apk"),
     URL_APK("http://"+IP.getConfig()+"/Dev/apps/"+NAME_APK.getConfig()),
